@@ -17,22 +17,38 @@
 # NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
 # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
-# File:     shoes_mvc.gemspec
-# Created:  Sat 19 Nov 2011 11:45:06 GMT
+# File:     test_keyed_array_table_model.rb
+# Created:  Sat 19 Nov 2011 19:17:50 GMT
 #
 ######################################################################
 #++
 
-require 'rake'
+require 'testy'
+require 'shoes_mvc/models'
 
-Gem::Specification.new do |s|
-  s.name        = "shoes_mvc"
-  s.version     = "0.0.0"
-  s.date        = "2011-11-19"
-  s.summary     = "Shoes MVC"
-  s.description = "A basic MVC framework for the Shoes toolkit"
-  s.authors     = [ "Andrew S. Townley" ]
-  s.email       = "ast@atownley.org"
-  s.files       = FileList['lib/**/*.rb', 'test/**/*', '[A-Z]*', 'shoes_mvc.gemspec'].to_a
-  s.homepage    = "http://atownley.org/shoes_mvc"
+include ShoesMVC::Models
+
+Testy.testing "Core KeyedArrayTableModel tests" do
+  test "Basic functionality" do |result|
+    keys = %w( foo bar )
+    data = [ [ "Foo1", "Bar1" ], [ "Foo2", "Bar2" ] ]
+    
+    model = KeyedArrayTableModel.new(keys, data)
+    model.each_with_index do |row, i|
+      keys.each_with_index do |key, j|
+        result.check "row[#{i}][:#{key}] value is correct",
+            :expect => data[i][j],
+            :actual => row[key]
+      end
+    end
+
+    data << [ "Foo3", "Bar3" ]
+    model.each_with_index do |row, i|
+      keys.each_with_index do |key, j|
+        result.check "row[#{i}][:#{key}] value is correct after add",
+            :expect => data[i][j],
+            :actual => row[key]
+      end
+    end
+  end
 end

@@ -17,22 +17,40 @@
 # NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
 # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
-# File:     shoes_mvc.gemspec
-# Created:  Sat 19 Nov 2011 11:45:06 GMT
+# File:     test_array_table_model.rb
+# Created:  Sat 19 Nov 2011 20:00:25 GMT
 #
 ######################################################################
 #++
 
-require 'rake'
+require 'testy'
+require 'shoes_mvc/models'
 
-Gem::Specification.new do |s|
-  s.name        = "shoes_mvc"
-  s.version     = "0.0.0"
-  s.date        = "2011-11-19"
-  s.summary     = "Shoes MVC"
-  s.description = "A basic MVC framework for the Shoes toolkit"
-  s.authors     = [ "Andrew S. Townley" ]
-  s.email       = "ast@atownley.org"
-  s.files       = FileList['lib/**/*.rb', 'test/**/*', '[A-Z]*', 'shoes_mvc.gemspec'].to_a
-  s.homepage    = "http://atownley.org/shoes_mvc"
+include ShoesMVC::Models
+
+Testy.testing "Core ArrayTableModel tests" do
+  test "Basic functionality" do |result|
+    keys = [ :foo, :bar ]
+    data = [
+      { :foo => "Foo1", :bar => "Bar1" }, 
+      { :foo => "Foo2", :bar => "Bar2" } ]
+    
+    model = ArrayTableModel.new(data)
+    model.each_with_index do |row, i|
+      keys.each do |key|
+        result.check "row[#{i}][:#{key}] value is correct",
+            :expect => data[i][key],
+            :actual => row[key]
+      end
+    end
+
+    data << { :foo => "Foo3", :bar => "Bar3" }
+    model.each_with_index do |row, i|
+      keys.each do |key|
+        result.check "row[#{i}][:#{key}] value is correct after add",
+            :expect => data[i][key],
+            :actual => row[key]
+      end
+    end
+  end
 end

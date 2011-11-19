@@ -17,22 +17,43 @@
 # NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
 # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
-# File:     shoes_mvc.gemspec
-# Created:  Sat 19 Nov 2011 11:45:06 GMT
+# File:     array_table_model.rb
+# Created:  Sat 19 Nov 2011 19:56:17 GMT
 #
-######################################################################
-#++
+#####################################################################
+#++ 
 
-require 'rake'
+module ShoesMVC
+module Models
 
-Gem::Specification.new do |s|
-  s.name        = "shoes_mvc"
-  s.version     = "0.0.0"
-  s.date        = "2011-11-19"
-  s.summary     = "Shoes MVC"
-  s.description = "A basic MVC framework for the Shoes toolkit"
-  s.authors     = [ "Andrew S. Townley" ]
-  s.email       = "ast@atownley.org"
-  s.files       = FileList['lib/**/*.rb', 'test/**/*', '[A-Z]*', 'shoes_mvc.gemspec'].to_a
-  s.homepage    = "http://atownley.org/shoes_mvc"
+  # This class implements the TableModel interface based on
+  # the data being stored in an array.  The elements in the
+  # array must either be a Hash, or they must respond to the
+  # [] accessors for retrieving elements by key and implement
+  # a #keys method for indicating the properties in each row
+  # instance.
+
+  class ArrayTableModel < TableModel
+    def initialize(data)
+      @data = data
+    end
+
+    def keys
+      if @data && @data.size > 0
+        @data.keys
+      else
+        {}
+      end
+    end
+
+    def each(&block)
+      @data.each(&block)
+    end
+
+    def each_with_index(&block)
+      @data.each_with_index(&block)
+    end
+  end
+
+end
 end

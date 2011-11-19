@@ -17,22 +17,26 @@
 # NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
 # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
-# File:     shoes_mvc.gemspec
-# Created:  Sat 19 Nov 2011 11:45:06 GMT
+# File:     table_model.rb
+# Created:  Sat 19 Nov 2011 18:13:40 GMT
 #
-######################################################################
-#++
+#####################################################################
+#++ 
 
-require 'rake'
+module ShoesMVC
+module Models
 
-Gem::Specification.new do |s|
-  s.name        = "shoes_mvc"
-  s.version     = "0.0.0"
-  s.date        = "2011-11-19"
-  s.summary     = "Shoes MVC"
-  s.description = "A basic MVC framework for the Shoes toolkit"
-  s.authors     = [ "Andrew S. Townley" ]
-  s.email       = "ast@atownley.org"
-  s.files       = FileList['lib/**/*.rb', 'test/**/*', '[A-Z]*', 'shoes_mvc.gemspec'].to_a
-  s.homepage    = "http://atownley.org/shoes_mvc"
+  # This class defines the behavior of a base TableModel API
+  # that is used by the TableView class.  The model represents
+  # an ordered set of data rows which are "square" in that
+  # they are expected to all have the same number of columns.
+  #
+  # Logically, each of the elements in the table model is a
+  # row instance that provides keyed property access to the
+  # data in the model based on the [] method.
+
+  class TableModel
+  end
+
+end
 end

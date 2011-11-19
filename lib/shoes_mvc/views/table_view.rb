@@ -17,22 +17,34 @@
 # NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
 # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
-# File:     shoes_mvc.gemspec
-# Created:  Sat 19 Nov 2011 11:45:06 GMT
+# File:     ar_model_editor.rb
+# Created:  Sat 19 Nov 2011 11:26:37 GMT
 #
-######################################################################
-#++
+#####################################################################
+#++ 
 
-require 'rake'
+module ShoesMVC
+module Views
 
-Gem::Specification.new do |s|
-  s.name        = "shoes_mvc"
-  s.version     = "0.0.0"
-  s.date        = "2011-11-19"
-  s.summary     = "Shoes MVC"
-  s.description = "A basic MVC framework for the Shoes toolkit"
-  s.authors     = [ "Andrew S. Townley" ]
-  s.email       = "ast@atownley.org"
-  s.files       = FileList['lib/**/*.rb', 'test/**/*', '[A-Z]*', 'shoes_mvc.gemspec'].to_a
-  s.homepage    = "http://atownley.org/shoes_mvc"
+  # This class provides a basic TableView control based
+  # loosely on the Archistry JavaScript TreeGrid API.  It
+  # requires that the data to be displayed be supplied as a
+  # TableModel instance.
+
+  class TableView < Shoes::Widget
+    def initialize(model, options = {}, &block)
+      super(options, &block)
+      load(model, options, &block)
+    end
+
+    # This method is used to load the view with the
+    # information in the table model.
+
+    def load(model, options = {}, &block)
+    end
+
+  protected
+  end
+
+end
 end
