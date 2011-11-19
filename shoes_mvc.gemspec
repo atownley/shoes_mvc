@@ -27,12 +27,12 @@ require 'rake'
 
 Gem::Specification.new do |s|
   s.name        = "shoes_mvc"
-  s.version     = "0.0.0"
+  s.version     = "0.0.1"
   s.date        = "2011-11-19"
   s.summary     = "Shoes MVC"
   s.description = "A basic MVC framework for the Shoes toolkit"
   s.authors     = [ "Andrew S. Townley" ]
   s.email       = "ast@atownley.org"
   s.files       = FileList['lib/**/*.rb', 'test/**/*', '[A-Z]*', 'shoes_mvc.gemspec'].to_a
-  s.homepage    = "http://atownley.org/shoes_mvc"
+  s.homepage    = "https://github.com/atownley/shoes_mvc"
 end
