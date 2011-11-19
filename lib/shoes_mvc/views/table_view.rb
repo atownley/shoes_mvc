@@ -17,8 +17,8 @@
 # NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
 # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
-# File:     ar_model_editor.rb
-# Created:  Sat 19 Nov 2011 11:26:37 GMT
+# File:     table_view.rb
+# Created:  Sat 19 Nov 2011 20:14:33 GMT
 #
 #####################################################################
 #++ 
@@ -41,9 +41,51 @@ module Views
     # information in the table model.
 
     def load(model, options = {}, &block)
+      cols = columns(model, options)
+      defw = "#{100 / cols.size}%"
+      build_header(model, cols, defw, options)
+      stack(:width => "100%") do
+        model.each { |row| build_row(cols, row, defw) }
+      end
     end
 
   protected
+    # This method extracts or creates the column model for the
+    # view.
+
+    def columns(model, options)
+      if cols = options[:columns]
+        cols
+      else
+        cols = model.keys.collect do |k|
+          { :key => k.to_sym, :label => "#{k.capitalize}" }
+        end
+      end
+    end
+
+    def build_header(model, cols, defw, options)
+      if options[:headers] != false
+        stack(:width => "100%") do
+          flow do
+            cols.each do |col|
+              flow(:width => defw) do
+                para col[:label], :weight => "bold", :align => "center"
+              end
+            end
+          end
+        end
+      end
+    end
+
+    def build_row(cols, row, defw)
+      flow do
+        cols.each do |col|
+          flow(:width => defw) do
+            para row[col[:key]], col[:style]
+          end
+        end
+      end
+    end
   end
 
 end

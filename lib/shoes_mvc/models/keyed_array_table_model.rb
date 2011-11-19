@@ -62,6 +62,10 @@ module Models
       @data = data
     end
 
+    def keys
+      @keys.keys
+    end
+
     def each(&block)
       @data.each do |x|
         block.call(Row.new(@keys, x))
