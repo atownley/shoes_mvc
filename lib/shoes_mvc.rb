@@ -24,5 +24,5 @@
 #++
 
 require 'yaml'
-require 'controllers/app_controller'
-require 'views'
+require 'shoes_mvc/controllers/app_controller'
+require 'shoes_mvc/views'

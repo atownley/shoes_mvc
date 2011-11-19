@@ -23,4 +23,4 @@
 #####################################################################
 #++ 
 
-require 'views/ar_model_editor'
+require 'shoes_mvc/views/ar_model_editor'
