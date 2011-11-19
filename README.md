@@ -33,6 +33,6 @@ Known Issues
 The following issues are related to getting this gem actually
 installed and working as expected:
 
-	* http://librelist.com/browser/shoes/2011/11/18/a-tangled-web-mess-of-dependencies-encoding-vs-sqlite3-vs-activerecord/
-	* https://github.com/shoes/shoes/issues/163
-	* https://github.com/shoes/shoes/issues/164
+ * http://librelist.com/browser/shoes/2011/11/18/a-tangled-web-mess-of-dependencies-encoding-vs-sqlite3-vs-activerecord/
+ * https://github.com/shoes/shoes/issues/163
+ * https://github.com/shoes/shoes/issues/164
