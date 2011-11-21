@@ -48,6 +48,6 @@ With Policeman, the Encoding class doesn't seem to actually be defined
 completely.  As a result, anything to do with Encoding and
 ActiveRecord chokes fairly hard.  The "solution" is to hack the
 encoding.rb file in activesupport so that it 
-defines #encoding_supported? as false.  Neat, huh?
+defines #encoding_aware? as false.  Neat, huh?
 
 Hopefully, this will all get fixed with the next release of Shoes. :(
