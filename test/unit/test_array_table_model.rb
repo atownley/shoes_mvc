@@ -17,21 +17,22 @@
 # NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
 # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
-# File:     shoes_mvc.gemspec
-# Created:  Sat 19 Nov 2011 11:45:06 GMT
+# File:     test_shoes_mvc.rb
+# Created:  Mon 21 Nov 2011 18:10:45 GMT
 #
 ######################################################################
 #++
 
-require 'rake'
+require 'testy'
+require 'shoes_mvc/module'
 
-Gem::Specification.new do |s|
-  s.name        = "shoes_mvc"
-  s.version     = "0.0.2"
-  s.summary     = "Shoes MVC"
-  s.description = "A basic MVC framework for the Shoes toolkit"
-  s.authors     = [ "Andrew S. Townley" ]
-  s.email       = "ast@atownley.org"
-  s.files       = FileList['lib/**/*.rb', 'test/**/*', '[A-Z]*', 'shoes_mvc.gemspec'].to_a
-  s.homepage    = "https://github.com/atownley/shoes_mvc"
+Testy.testing "Core module tests" do
+  test "Basic functionality" do |result|
+    data = %w( some_path some_path module_klass )
+    %w( /some_path /somePath Module::Klass ).each_with_index do |uri, i|
+      result.check "uri to method_name #{uri}",
+          :expect => data[i],
+          :actual => ShoesMVC.method_name(uri)
+    end
+  end
 end

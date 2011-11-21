@@ -23,5 +23,25 @@
 #####################################################################
 #++ 
 
-require 'shoes_mvc/views/ar_model_editor'
+module ShoesMVC
+  module Views
+    
+    # This is the base view class that provides integration
+    # with the controllers
+
+    class View < Shoes::Widget
+      attr_accessor :controller
+
+      def initialize(*args)
+        if(options = args.last).is_a? Hash
+          self.controller = options[:controller]
+        end
+      end
+    end
+  end
+end
+
 require 'shoes_mvc/views/table_view'
+require 'shoes_mvc/views/ar_model_editor'
+require 'shoes_mvc/views/ar_type_list'
+require 'shoes_mvc/views/ar_type_editor'

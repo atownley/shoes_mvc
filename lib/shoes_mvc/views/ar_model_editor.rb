@@ -52,17 +52,37 @@ module Views
       stack :width => "100%" do
         flow :width => "100%" do
           model.attributes.keys.sort.each do |key|
+            # FIXME: I can't believe that you have to do this
+            # this way with AR.  I'm surely missing
+            # something...
+            m = "#{key}=".to_sym
             value = model.attributes[key]
             flow :width => lwidth, :margin_top => 2 do
               para key, :weight => 'bold', :align => "right"
             end
             flow :width => 1 - lwidth do
               edit_line model.attributes[key] do |e|
-                model.attributes[key] = e.text
+                model.send(m, e.text)
               end
             end
           end
         end
+      end
+
+      @model = model
+      @options = options
+    end
+
+    def save
+      debug("model: #{@model.inspect}")
+      @model.save!
+    end
+
+    def create
+      if @model
+        load(@model.class.new, options)
+      else
+        alert("No template model.\nUse the #load method instead.")
       end
     end
   end

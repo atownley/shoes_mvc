@@ -17,21 +17,29 @@
 # NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
 # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
-# File:     shoes_mvc.gemspec
-# Created:  Sat 19 Nov 2011 11:45:06 GMT
+# File:     ar_type_list.rb
+# Created:  Mon 21 Nov 2011 15:57:27 GMT
 #
-######################################################################
-#++
+#####################################################################
+#++ 
 
-require 'rake'
+module ShoesMVC
+module Views
 
-Gem::Specification.new do |s|
-  s.name        = "shoes_mvc"
-  s.version     = "0.0.2"
-  s.summary     = "Shoes MVC"
-  s.description = "A basic MVC framework for the Shoes toolkit"
-  s.authors     = [ "Andrew S. Townley" ]
-  s.email       = "ast@atownley.org"
-  s.files       = FileList['lib/**/*.rb', 'test/**/*', '[A-Z]*', 'shoes_mvc.gemspec'].to_a
-  s.homepage    = "https://github.com/atownley/shoes_mvc"
+  class ActiveRecordTypeList < TableView
+    def load(model, options = {}, &block)
+      @entity_type = model
+      super(model.find(options[:query] || :all), options, &block)
+    end
+
+    def columns(model, options)
+      cols = []
+      @entity_type.attribute_names.each do |key|
+        cols << { :key => key, :label => key.capitalize }
+      end
+      cols
+    end
+  end
+
+end
 end

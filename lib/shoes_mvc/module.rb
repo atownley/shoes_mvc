@@ -17,21 +17,19 @@
 # NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
 # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
-# File:     shoes_mvc.gemspec
-# Created:  Sat 19 Nov 2011 11:45:06 GMT
+# File:     module.rb
+# Created:  Sat 19 Nov 2011 11:24:19 GMT
 #
 ######################################################################
 #++
 
-require 'rake'
+module ShoesMVC
+  # This method is used to convert a name to a method name.
+  # It is borrowed and adapted from shoes.rb:538-540.
 
-Gem::Specification.new do |s|
-  s.name        = "shoes_mvc"
-  s.version     = "0.0.2"
-  s.summary     = "Shoes MVC"
-  s.description = "A basic MVC framework for the Shoes toolkit"
-  s.authors     = [ "Andrew S. Townley" ]
-  s.email       = "ast@atownley.org"
-  s.files       = FileList['lib/**/*.rb', 'test/**/*', '[A-Z]*', 'shoes_mvc.gemspec'].to_a
-  s.homepage    = "https://github.com/atownley/shoes_mvc"
+  def self.method_name(str)
+    str.to_s.gsub("/", "").gsub("::", "_").
+            gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+            gsub(/([a-z\d])([A-Z])/,'\1_\2').downcase
+  end
 end

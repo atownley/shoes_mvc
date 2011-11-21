@@ -6,6 +6,10 @@ This project provides a basic MVC framework on top of the Shoes
 environment for those of us strange people who have done MVC so long
 it's extremely difficult to think about applications other ways.
 
+*NOTE: this code is **highly experimental** and an early work in
+progress.  It wouldn't be wise to rely on it right now for anything
+other than experiments, prototypes and proofs of concept.*
+
 Installation
 ============
 
@@ -36,3 +40,14 @@ installed and working as expected:
  * http://librelist.com/browser/shoes/2011/11/18/a-tangled-web-mess-of-dependencies-encoding-vs-sqlite3-vs-activerecord/
  * https://github.com/shoes/shoes/issues/163
  * https://github.com/shoes/shoes/issues/164
+
+Additional Encoding Hack
+------------------------
+
+With Policeman, the Encoding class doesn't seem to actually be defined
+completely.  As a result, anything to do with Encoding and
+ActiveRecord chokes fairly hard.  The "solution" is to hack the
+encoding.rb file in activesupport so that it defines
+#encoding_supported? as false.  Neat, huh?
+
+Hopefully, this will all get fixed with the next release of Shoes. :(

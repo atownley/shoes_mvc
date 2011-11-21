@@ -31,7 +31,7 @@ module Views
   # requires that the data to be displayed be supplied as a
   # TableModel instance.
 
-  class TableView < Shoes::Widget
+  class TableView < View
     def initialize(model, options = {}, &block)
       super(options, &block)
       load(model, options, &block)
@@ -81,7 +81,11 @@ module Views
       flow do
         cols.each do |col|
           flow(:width => defw) do
-            para row[col[:key]], col[:style]
+            if(r = col[:renderer])
+              r.render(self, row, col)
+            else
+              para row[col[:key]], col[:style]
+            end
           end
         end
       end

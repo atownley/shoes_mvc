@@ -25,6 +25,30 @@
 
 module ShoesMVC
 
+  # This module takes care of dispatching links to controller
+  # classes.
+
+  module LinkDispatcher
+    # This method is a callback to allow links embedded in
+    # views to trigger controller actions in a loosely-coupled
+    # manner.
+    #
+    # The default implementation will attempt to call methods
+    # based on applying the ShoesMVC#method_name
+    # transformation and checking if the controller responds
+    # to the method.  To manually dispatch the method, simply
+    # override this method in the derived class.
+
+    def link_activated(sender, link)
+      @shoes.debug("#link_activated(#{sender}, #{link}")
+      m = ShoesMVC.method_name(link).to_sym
+      if self.respond_to? m
+        @shoes.debug("dispatching to ##{m}")
+        self.send(m, sender, link)
+      end
+    end
+  end
+
   # This controller is used to assist in writing Shoes
   # applications for an existing Rails application.  All of
   # the models will be automatically loaded based on the
@@ -32,6 +56,8 @@ module ShoesMVC
   # database connection environment will be used.
 
   class AppController
+    include LinkDispatcher
+
     # The controller is instantiated by an
     # application-specific controller instance that passes
     # through the location of the appication controller source
