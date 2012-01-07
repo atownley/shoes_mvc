@@ -16,8 +16,7 @@ Evolution
 While this code could well be the basis for something more
 sophisticated with Shoes, I'm now mostly concentrating on a
 more generic MVC library for cross-platform Ruby applications
-that doesn't depend on Shoes:
-(https://github.com/atownley/ruby_mvc).
+that doesn't depend on Shoes: https://github.com/atownley/ruby_mvc
 
 The main reasons for this is that I need more sophisticated
 GUI control interactions for the types of applications I want
