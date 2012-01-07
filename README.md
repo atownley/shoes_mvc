@@ -10,6 +10,25 @@ it's extremely difficult to think about applications other ways.
 progress.  It wouldn't be wise to rely on it right now for anything
 other than experiments, prototypes and proofs of concept.*
 
+Evolution
+=========
+
+While this code could well be the basis for something more
+sophisticated with Shoes, I'm now mostly concentrating on a
+more generic MVC library for cross-platform Ruby applications
+that doesn't depend on Shoes:
+(https://github.com/atownley/ruby_mvc).
+
+The main reasons for this is that I need more sophisticated
+GUI control interactions for the types of applications I want
+to build than are possible with what's currently in Shoes.  I
+still think Shoes is great for a lot of things, but for the
+immediate needs I have for 2011/2012, Ruby MVC is more
+appropriate.
+
+If you're interested in expanding on what's here, just fork
+and send pull requests.
+
 Installation
 ============
 
